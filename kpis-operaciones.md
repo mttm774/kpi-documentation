@@ -498,11 +498,11 @@ Consulta la población útil (pasajeros distintos con viajes aprobados) registra
 |-------------------------------------|---------------------------------------------------------|
 | Programa de agrupación              | SÍ                                                      |
 | Evento disparador                   | Aprobación del servicio                                 |
-| Tópico en la cola                   | `aprobacion_cumplimiento_transportista`                 |
+| Tópico en la cola                   | `transport-compliance-approval`                 |
 | Procedimiento de agrupación         | `PRC_RIDECODE_KPI_USEFUL_POPULATION_AGGREGATION`        |
 | Parámetros procedimiento agrupación | `summaryServiceId`                                      |
 
-> El evento es disparado por la **aprobación de un servicio**, lo que guarda un mensaje en la cola con su payload. El worker escucha la cola `aprobacion_cumplimiento_transportista` y ejecuta la agrupación. Adicionalmente, la agrupación se ejecuta de forma programada todos los días a las 00:00 (hora de la zona franca según su zona horaria).
+> El evento es disparado por la **aprobación de un servicio**, lo que guarda un mensaje en la cola con su payload. El worker escucha la cola `transport-compliance-approval` y ejecuta la agrupación. Adicionalmente, la agrupación se ejecuta de forma programada todos los días a las 00:00 (hora de la zona franca según su zona horaria).
 >
 > El programa de agrupación garantiza que solo se contabilicen pasajeros distintos con transacciones exitosas (reading records), actualizando el registro correspondiente en la tabla de hechos.
 
@@ -813,11 +813,11 @@ Consulta el Top 10 de paradas con mayor promedio de abordajes en un rango de fec
 |-------------------------------------|-----------------------------------------------------------------------------------|
 | Programa de agrupación              | SÍ                                                                                |
 | Evento disparador                   | Aprobación en informe de cumplimiento por parte del transportista                 |
-| Tópico en la cola                   | `aprobacion_cumplimiento_transportista`                                           |
+| Tópico en la cola                   | `transport-compliance-approval`                                                   |
 | Procedimiento de agrupación         | `PRC_RIDECODE_KPI_STOP_BOARDING_AGGREGATION`                                      |
 | Parámetros procedimiento agrupación | `SummaryServiceId`                                                                |
 
-> El evento es disparado por la **aprobación en el informe de cumplimiento por parte del transportista**, lo que guarda un mensaje en la cola con su payload. El worker escucha la cola `aprobacion_cumplimiento_transportista` y ejecuta la agrupación. Adicionalmente, la agrupación se ejecuta de forma programada todos los días a las 00:00 (hora de la zona franca según su zona horaria).
+> El evento es disparado por la **aprobación en el informe de cumplimiento por parte del transportista**, lo que guarda un mensaje en la cola con su payload. El worker escucha la cola `transport-compliance-approval` y ejecuta la agrupación. Adicionalmente, la agrupación se ejecuta de forma programada todos los días a las 00:00 (hora de la zona franca según su zona horaria).
 >
 > El programa de agrupación realiza un MERGE calculando la cantidad de pasajeros por parada, garantizando que múltiples eventos sobre el mismo servicio no generen registros duplicados.
 
@@ -1359,7 +1359,7 @@ Consulta los registros de exceso de velocidad en un rango de fechas dentro de un
 | Campo                     | Valor                                                                                          |
 |---------------------------|------------------------------------------------------------------------------------------------|
 | Operación                 | Upsert en la tabla de exceso de velocidad, conservando el máximo valor por conductor por día y ramal |
-| Tabla de hechos           | `Exceso_velocidad`                                                                             |
+| Tabla de hechos           | `SPEED_EXCESS`                                                                                 |
 | Procedimiento de consulta | `PRC_RIDECODE_GET_KPI_SPEED_EXCESS`                                                            |
 
 ---
@@ -1368,7 +1368,7 @@ Consulta los registros de exceso de velocidad en un rango de fechas dentro de un
 
 El límite de velocidad para comparación ya existe como parámetro de zona franca (`LIMITE_VEL_AUTOBUSES`; ver pestaña de telemetría — límite velocidad autobuses). En la consulta, por conductor se trae el valor máximo de velocidad dentro del rango de fechas. Si el parámetro `LIMITE_VEL_AUTOBUSES` no está configurado para la zona franca, el procedimiento no retorna resultados y termina inmediatamente. La consulta es paginada.
 
-La estructura de la tabla de hechos `EXCESO_VELOCIDAD` incluye: `IdExcesoVelocidad`, `zona franca`, `empresa transporte`, `turno`, `ramal`, `Fecha`, `IdConductor`, `NombreConductor` y `Velocidad`.
+La estructura de la tabla de hechos `SPEED_EXCESS` incluye: `IdExcesoVelocidad`, `zona franca`, `empresa transporte`, `turno`, `ramal`, `Fecha`, `IdConductor`, `NombreConductor` y `Velocidad`.
 
 ---
 
