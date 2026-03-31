@@ -1188,7 +1188,7 @@ Esto significa que los datos siempre reflejan el estado más reciente disponible
 
 **¿Cómo se consulta la información?**
 
-Al cargar el KPI, el sistema consulta los datos ya calculados y almacenados. El usuario puede definir turno, ramal, tipo de ruta y rango de fechas para acotar los resultados.
+Al cargar el KPI, el sistema consulta los datos ya calculados y almacenados. El usuario puede definir un rango de fechas para acotar los resultados.
 
 ---
 
@@ -1196,9 +1196,9 @@ Al cargar el KPI, el sistema consulta los datos ya calculados y almacenados. El 
 
 | Filtro       | Aplica  |
 |--------------|---------|
-| Turno        | **SÍ**  |
-| Ramal        | **SÍ**  |
-| Tipo de ruta | **SÍ**  |
+| Turno        | **NO**  |
+| Ramal        | **NO**  |
+| Tipo de ruta | **NO**  |
 | Fecha inicio | **SÍ**  |
 | Fecha fin    | **SÍ**  |
 
@@ -1210,9 +1210,9 @@ Consulta los puntos de densidad de pasajeros por coordenada geográfica en un ra
 
 | Filtro       | Aplica  |
 |--------------|---------|
-| Turno        | **SÍ**  |
-| Ramal        | **SÍ**  |
-| Tipo de ruta | **SÍ**  |
+| Turno        | **NO**  |
+| Ramal        | **NO**  |
+| Tipo de ruta | **NO**  |
 | Fecha inicio | **SÍ**  |
 | Fecha fin    | **SÍ**  |
 
@@ -1248,7 +1248,7 @@ Consulta los puntos de densidad de pasajeros por coordenada geográfica en un ra
 
 | Campo                     | Valor                                                                                                     |
 |---------------------------|-----------------------------------------------------------------------------------------------------------|
-| Operación                 | Agrupación de pasajeros por latitud y longitud según radio parametrizado, por turno, ramal y tipo de ruta |
+| Operación                 | Agrupación de pasajeros por latitud y longitud según radio parametrizado.                                 |
 | Tabla de hechos           | —                                                                                                         |
 | Procedimiento de consulta | `PRC_RIDECODE_GET_KPI_PASSENGER_DENSITY`                                                                  |
 
@@ -1256,7 +1256,7 @@ Consulta los puntos de densidad de pasajeros por coordenada geográfica en un ra
 
 **Observación técnica**
 
-Los pasajeros se agrupan según un radio configurable por zona franca (por defecto: **1 km**). La tabla de hechos `DENSIDAD_PASAJEROS` incluye: `id_densidad_pasajeros`, `zona franca`, `empresa cliente`, `turno`, `ramal`, `Fecha`, `Latitud`, `Longitud` y `Cantidad`.
+Los pasajeros se agrupan según un radio configurable por zona franca (por defecto: **1 km**). La tabla de hechos `DENSIDAD_PASAJEROS` incluye: `id_densidad_pasajeros`, `zona franca`, `empresa cliente`,  `Fecha`, `Latitud`, `Longitud` y `Cantidad`.
 
 ---
 
