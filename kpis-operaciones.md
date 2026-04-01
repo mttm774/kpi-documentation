@@ -435,7 +435,7 @@ La estructura de la tabla de hechos `ACTIVE_POPULATION` incluye: `id_población_
 ### [Usuario]
 
 **¿Qué muestra este KPI?**
-Muestra la sumatoria de pasajeros útiles (pasajeros distintos con viajes aprobados) registrados en la zona franca, tomando únicamente el dato del día más reciente dentro del rango de fechas seleccionado. Solo se consideran las transacciones exitosas (reading records).
+Muestra la sumatoria de pasajeros útiles (pasajeros distintos con viajes aprobados) registrados en la zona franca, tomando únicamente el dato del día más reciente dentro del rango de fechas seleccionado. Solo se consideran las transacciones exitosas.
 
 ---
 
@@ -574,7 +574,7 @@ Al cargar el KPI, el sistema ejecuta la consulta en tiempo real con base en los 
 
 **Descripción** _(se muestra como tooltip en la página de KPIs y en el dashboard)_
 
-Cuenta el total de rutas distintas aperturadas (creadas) dentro de un rango de fechas en una zona franca. La conversión de zona horaria se realiza de forma inversa: en lugar de ajustar la fecha de los registros, convierte los límites del rango a UTC para filtrar directamente sobre el campo CreationDate de la ruta. Retorna un único valor con el conteo de rutas únicas.
+Cuenta el total de rutas distintas aperturadas (creadas) dentro de un rango de fechas en una zona franca. La conversión de zona horaria se realiza de forma inversa: en lugar de ajustar la fecha de los registros, convierte los límites del rango a UTC para filtrar directamente sobre de la ruta. Retorna un único valor con el conteo de rutas únicas.
 
 | Filtro       | Aplica  |
 |--------------|---------|
@@ -646,9 +646,7 @@ La conversión de zona horaria se realiza de forma inversa: en lugar de ajustar 
 **¿Qué muestra este KPI?**
 Muestra el tiempo promedio de servicio (en formato HH:MM) para cada ramal, calculado como la diferencia en minutos entre la hora de inicio y la hora de llegada al destino de los servicios aprobados. El resultado se presenta ordenado de mayor a menor tiempo promedio con soporte de paginación.
 
-Retorna dos conjuntos de información:
-1. **Total de ramales** — para la paginación.
-2. **Listado paginado** — ramales con su tiempo promedio.
+**Listado paginado** — ramales con su tiempo promedio.
 
 ---
 
@@ -785,7 +783,7 @@ Al cargar el KPI, el sistema consulta los datos ya calculados y almacenados. El 
 
 **Descripción** _(se muestra como tooltip en la página de KPIs y en el dashboard)_
 
-Consulta el Top 10 de paradas con mayor promedio de abordajes en un rango de fechas dentro de una zona franca, ordenadas de mayor a menor. Los registros sin parada asociada se agrupan bajo la etiqueta "Sin parada". A diferencia de otros procedimientos, el filtro de fecha se aplica directamente sobre BoardingDate sin ajuste de zona horaria, ya que dicho campo se almacena como fecha local.
+Consulta el Top 10 de paradas con mayor promedio de abordajes en un rango de fechas dentro de una zona franca, ordenadas de mayor a menor. Los registros sin parada asociada se agrupan bajo la etiqueta "Sin parada".
 
 | Filtro       | Aplica  |
 |--------------|---------|
@@ -1058,7 +1056,7 @@ Solo se consideran los servicios aprobados por cumplimiento de empresa de transp
 
 ---
 
-## KPI: Participación por Tipo de Ruta
+## KPI: Participación por transportista y empresa cliente
 
 ---
 
@@ -1278,11 +1276,9 @@ Los pasajeros se agrupan según un radio configurable por zona franca (por defec
 ### [Usuario]
 
 **¿Qué muestra este KPI?**
-Muestra los registros de exceso de velocidad de los conductores en el rango de fechas seleccionado, comparando la velocidad registrada contra el límite configurado por zona franca (`LIMITE_VEL_AUTOBUSES`). Si dicho parámetro no está configurado, el KPI no retorna resultados.
+Muestra los registros de exceso de velocidad de los conductores en el rango de fechas seleccionado, comparando la velocidad registrada contra el límite configurado por zona franca. Si dicho parámetro no está configurado, el KPI no retorna resultados.
 
-El resultado se presenta paginado con dos conjuntos de información:
-1. **Total de registros** — para la paginación.
-2. **Listado paginado** — conductores con velocidad registrada y límite aplicado, ordenados de mayor a menor velocidad.
+**Listado paginado** — conductores con velocidad registrada y límite aplicado, ordenados de mayor a menor velocidad.
 
 > **Nota:** La lectora envía únicamente las telemetrías que ya superaron el límite de velocidad.
 
@@ -1316,7 +1312,7 @@ Al cargar el KPI, el sistema consulta los datos ya calculados y almacenados. El 
 
 **Descripción** _(se muestra como tooltip en la página de KPIs y en el dashboard)_
 
-Consulta los registros de exceso de velocidad en un rango de fechas dentro de una zona franca, comparando la velocidad registrada contra el límite configurado por parámetro de zona franca (LIMITE_VEL_AUTOBUSES). Si dicho parámetro no está configurado, el procedimiento no retorna ningún resultado y termina inmediatamente. Retorna dos conjuntos de resultados: el total de registros para paginación y el listado paginado de conductores con su velocidad registrada y el límite aplicado, ordenado de mayor a menor velocidad.
+Consulta los registros de exceso de velocidad en un rango de fechas dentro de una zona franca, comparando la velocidad registrada contra el límite configurado por parámetro de zona franca. Si dicho parámetro no está configurado, el procedimiento no retorna ningún resultado y termina inmediatamente. Retorna dos conjuntos de resultados: el total de registros para paginación y el listado paginado de conductores con su velocidad registrada y el límite aplicado, ordenado de mayor a menor velocidad.
 
 | Filtro       | Aplica  |
 |--------------|---------|
@@ -1390,7 +1386,7 @@ La estructura de la tabla de hechos `SPEED_EXCESS` incluye: `IdExcesoVelocidad`,
 ### [Usuario]
 
 **¿Qué muestra este KPI?**
-Muestra un mapa de calor de afluencia proyectada para el **día siguiente** a la fecha indicada, ubicando cada ruta en las coordenadas de su última parada (la de mayor orden en `STOPS_ROUTES`). La intensidad de cada punto se normaliza entre 0 y 1 según el total de pasajeros proyectados.
+Muestra un mapa de calor de afluencia proyectada para el **día siguiente** a la fecha indicada, ubicando cada ruta en las coordenadas de su última parada. La intensidad de cada punto se normaliza entre 0 y 1 según el total de pasajeros proyectados.
 
 > **Restricción importante:** Este KPI acepta únicamente **un único día** como entrada. Si se envía un rango de fechas (fecha inicio distinta de fecha fin), el sistema retornará un resultado vacío.
 
@@ -1422,7 +1418,7 @@ Al cargar el KPI, el sistema ejecuta la consulta en tiempo real. El usuario debe
 
 **Descripción** _(se muestra como tooltip en la página de KPIs y en el dashboard)_
 
-Consulta el mapa de calor de afluencia proyectada para el día siguiente a la fecha indicada, ubicando cada ruta en las coordenadas de su última parada (la de mayor orden en STOPS_ROUTES). La intensidad de cada punto se normaliza entre 0 y 1 dividiendo el total de pasajeros proyectados del punto entre el máximo encontrado en el conjunto filtrado. Solo acepta un único día como entrada (@StartDate debe ser igual a @EndDate); si se envía un rango, retorna un resultset vacío. El resultado se ordena de mayor a menor intensidad.
+Consulta el mapa de calor de afluencia proyectada para el día siguiente a la fecha indicada, ubicando cada ruta en las coordenadas de su última parada. La intensidad de cada punto se normaliza entre 0 y 1 dividiendo el total de pasajeros proyectados del punto entre el máximo encontrado en el conjunto filtrado. La fecha de inicio debe ser igual a la fecha fin. El resultado se ordena de mayor a menor intensidad.
 
 | Filtro       | Aplica                                  |
 |--------------|-----------------------------------------|
@@ -1496,9 +1492,7 @@ El procedimiento proyecta la afluencia del **día siguiente** a la fecha indicad
 **¿Qué muestra este KPI?**
 Muestra la proyección de sobrepoblación por ramal para el **día siguiente** a la fecha indicada, comparando la ocupación proyectada de pasajeros contra la capacidad histórica disponible de buses. Los resultados priorizan los ramales con mayor riesgo de sobrepoblación (mayor diferencia entre proyectado y disponible).
 
-Presenta dos conjuntos de información:
-1. **Total de ramales** — para la paginación.
-2. **Listado paginado** — ramales con ocupación proyectada, asientos disponibles y diferencia.
+**Listado paginado** — ramales con ocupación proyectada, asientos disponibles y diferencia.
 
 > **Restricción importante:** Este KPI acepta únicamente **un único día** como entrada. Si se envía un rango de fechas (fecha inicio distinta de fecha fin), el sistema retornará resultados vacíos.
 
@@ -1530,7 +1524,7 @@ Al cargar el KPI, el sistema ejecuta la consulta en tiempo real. El usuario debe
 
 **Descripción** _(se muestra como tooltip en la página de KPIs y en el dashboard)_
 
-Consulta la proyección de sobrepoblación por ramal para el día siguiente a la fecha indicada, comparando la ocupación proyectada de pasajeros contra la capacidad histórica disponible de buses. Solo acepta un único día como entrada (@StartDate debe ser igual a @EndDate); si se envía un rango, retorna resultados vacíos. El resultado se ordena por diferencia (proyectado menos disponible) de mayor a menor, priorizando los ramales con mayor riesgo de sobrepoblación. Retorna dos conjuntos de resultados: el total de ramales para paginación y el listado paginado con ocupación proyectada, asientos disponibles y diferencia por ramal.
+Consulta la proyección de sobrepoblación por ramal para el día siguiente a la fecha indicada, comparando la ocupación proyectada de pasajeros contra la capacidad histórica disponible de buses. Solo acepta un único día como entrada, si la fecha es mayor a la fecha final, retorna resultados vacíos. El resultado se ordena por diferencia (proyectado menos disponible) de mayor a menor, priorizando los ramales con mayor riesgo de sobrepoblación. Retorna el listado paginado con ocupación proyectada, asientos disponibles y diferencia por ramal.
 
 | Filtro       | Aplica                                  |
 |--------------|-----------------------------------------|
