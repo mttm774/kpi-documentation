@@ -25,6 +25,8 @@ Cada KPI se documenta con dos secciones:
 **¿Qué muestra este KPI?**
 Muestra la cantidad de tickets gestionados, clasificados por estado: **abiertos**, **cerrados** y **sin respuesta**, en el rango de fechas seleccionado.
 
+> **Nota de fecha:** El subtítulo del KPI debe indicar que la fecha utilizada es la **Fecha fin**. El rango de fechas seleccionado se interpreta tomando la última fecha para la agrupación de tickets.
+
 ---
 
 **¿Cuándo se calcula la información?**
@@ -41,7 +43,7 @@ Esto significa que los datos siempre reflejan el estado más reciente disponible
 
 **¿Cómo se consulta la información?**
 
-Al cargar el KPI, el sistema consulta los datos ya calculados y almacenados. El usuario puede filtrar por turno, ramal, tipo de ruta, fecha inicio y fecha fin para acotar los resultados.
+Al cargar el KPI, el sistema consulta los datos ya calculados y almacenados. El usuario puede filtrar por turno, ramal, tipo de ruta y fecha fin para acotar los resultados.
 
 ---
 
@@ -52,7 +54,7 @@ Al cargar el KPI, el sistema consulta los datos ya calculados y almacenados. El 
 | Turno        | **SÍ** |
 | Ramal        | **SÍ** |
 | Tipo de ruta | **SÍ** |
-| Fecha inicio | **SÍ** |
+| Fecha inicio | **NO** |
 | Fecha fin    | **SÍ** |
 
 ---
@@ -66,7 +68,7 @@ Consulta la cantidad de tickets gestionados según su estado (abiertos, cerrados
 | Turno        | **SÍ** |
 | Ramal        | **SÍ** |
 | Tipo de ruta | **SÍ** |
-| Fecha inicio | **SÍ** |
+| Fecha inicio | **NO** |
 | Fecha fin    | **SÍ** |
 
 ---
@@ -101,7 +103,7 @@ Consulta la cantidad de tickets gestionados según su estado (abiertos, cerrados
 
 | Campo                     | Valor                                                                                                                                    |
 |---------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| Operación                 | Contar el número de tickets por estado (abiertos, cerrados, sin respuesta) agrupados por zona franca, empresa de transporte, empresa cliente, ramal y turno, dentro del rango de fechas |
+| Operación                 | Contar el número de tickets por estado (abiertos, cerrados, sin respuesta) agrupados por zona franca, empresa de transporte, empresa cliente, ramal y turno, para la fecha fin |
 | Tabla de hechos           | `SUMMARY_TICKETS`                                                                                                                        |
 | Procedimiento de consulta | `PRC_RIDECODE_GET_KPI_TICKETS_MANAGEMENT`                                                                                                |
 
@@ -117,7 +119,7 @@ Consulta la cantidad de tickets gestionados según su estado (abiertos, cerrados
 
 | Elemento   | Español | Inglés |
 |------------|---------|--------|
-| Tooltip    | Consulta la cantidad de tickets gestionados según su estado (abiertos, cerrados y sin respuesta). | Queries the number of managed tickets by status (open, closed, and unanswered). |
+| Tooltip    | Consulta la cantidad de tickets gestionados según su estado (abiertos, cerrados y sin respuesta) en la fecha fin específica. | Queries the number of managed tickets by status (open, closed, and unanswered) on the specific end date. |
 | Subtítulo  | — | — |
 
 ---
@@ -131,7 +133,7 @@ Consulta la cantidad de tickets gestionados según su estado (abiertos, cerrados
 ### [Usuario]
 
 **¿Qué muestra este KPI?**
-Muestra el tiempo promedio, en horas, que transcurre entre la creación y el cierre de los tickets. Solo se consideran los tickets que ya han sido **cerrados** dentro del rango de fechas seleccionado.
+Muestra el tiempo promedio, en horas, que transcurre entre la creación y el cierre de los tickets agrupado por transportista. Solo se consideran los tickets que ya han sido **cerrados** dentro del rango de fechas seleccionado.
 
 ---
 
@@ -161,7 +163,7 @@ Al cargar el KPI, el sistema ejecuta la consulta en tiempo real con base en los 
 
 **Descripción** _(se muestra como tooltip en la página de KPIs y en el dashboard)_
 
-Consulta el tiempo promedio de respuesta de tickets cerrados (en horas), calculado entre la fecha de creación y cierre del ticket, filtrado por fecha de cierre del ticket.
+Consulta el tiempo promedio de respuesta de tickets cerrados (en horas) por transportista, calculado entre la fecha de creación y cierre del ticket, filtrado por fecha de cierre del ticket.
 
 | Filtro       | Aplica |
 |--------------|--------|
@@ -201,7 +203,7 @@ Consulta el tiempo promedio de respuesta de tickets cerrados (en horas), calcula
 
 | Campo                     | Valor                                                                                                                         |
 |---------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Operación                 | Promedio del tiempo de cierre en horas de los tickets cerrados, aplicando los filtros definidos; el filtro de fecha se aplica contra la fecha de cierre del ticket |
+| Operación                 | Promedio del tiempo de cierre en horas de los tickets cerrados por transportista, aplicando los filtros definidos; el filtro de fecha se aplica contra la fecha de cierre del ticket |
 | Tabla de hechos           | —                                                                                                                             |
 | Procedimiento de consulta | `PRC_RIDECODE_GET_KPI_TICKETS_AVERAGE_TIME_RESPONSE`                                                                          |
 
@@ -217,7 +219,7 @@ Solo se deben considerar los tickets con estado **cerrado**. El cálculo del tie
 
 | Elemento   | Español | Inglés |
 |------------|---------|--------|
-| Tooltip    | Consulta el tiempo promedio de respuesta de tickets cerrados (en horas), calculado entre la fecha de creación y cierre del ticket, filtrado por fecha de cierre del ticket. | Queries the average response time of closed tickets (in hours), calculated between the ticket creation and closing dates, filtered by the ticket closing date. |
+| Tooltip    | Consulta el tiempo promedio de respuesta de tickets cerrados (en horas) por transportista, calculado entre la fecha de creación y cierre del ticket, filtrado por fecha de cierre del ticket. | Queries the average response time of closed tickets (in hours) by carriers, calculated between the ticket creation and closing dates, filtered by the ticket closing date. |
 | Subtítulo  | — | — |
 
 ---
