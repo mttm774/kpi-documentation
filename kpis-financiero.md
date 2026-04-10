@@ -214,7 +214,7 @@ Consulta de las facturas emitidas, agrupadas por estado: pagadas o pendientes. L
 
 Los datos se obtienen de la tabla `invoice`, evaluando el estado de cada factura. Si el usuario pertenece a una empresa de **transporte**, no se retornan datos. El tiempo de vencimiento que determina la morosidad está configurado en el módulo de clientes.
 
-> **Condición obligatoria:** Solo se deben considerar los registros donde `ComplianceTransportCompanyApproved = 1`.
+
 
 ---
 
@@ -238,7 +238,6 @@ Los datos se obtienen de la tabla `invoice`, evaluando el estado de cada factura
 **¿Qué muestra este KPI?**
 Muestra la sumatoria del valor de ingreso de los transportistas por sus servicios prestados, agrupados por estado de pago: **pagados** o **pendientes**.
 
-> **Nota de fecha:** El subtítulo del KPI debe indicar: _"La fecha utilizada es la fecha fin"_. El filtro se aplica contra la Fecha fin para determinar el estado de pago de los servicios.
 
 ---
 
@@ -250,7 +249,7 @@ Este KPI **no utiliza precálculo ni agrupación**. La información se obtiene d
 
 **¿Cómo se consulta la información?**
 
-Al cargar el KPI, el sistema ejecuta la consulta en tiempo real. El usuario debe seleccionar la **Fecha fin** para definir el corte temporal; el sistema devolverá el estado de pago de los servicios a los transportistas en esa fecha.
+Al cargar el KPI, el sistema ejecuta la consulta en tiempo real. El usuario debe seleccionar la **Fecha inicio** y  **Fecha fin** para definir el corte temporal; el sistema devolverá el estado de pago de los servicios a los transportistas en este rango de fechas.
 
 ---
 
@@ -261,7 +260,7 @@ Al cargar el KPI, el sistema ejecuta la consulta en tiempo real. El usuario debe
 | Turno        | NO     |
 | Ramal        | NO     |
 | Tipo de ruta | NO     |
-| Fecha inicio | NO     |
+| Fecha inicio | **SÍ** |
 | Fecha fin    | **SÍ** |
 
 ---
@@ -275,7 +274,7 @@ Consulta de los servicios por pagar a los transportistas, se agrupan por estado:
 | Turno        | NO     |
 | Ramal        | NO     |
 | Tipo de ruta | NO     |
-| Fecha inicio | NO     |
+| Fecha inicio | **SÍ** |
 | Fecha fin    | **SÍ** |
 
 ---
@@ -316,7 +315,7 @@ Consulta de los servicios por pagar a los transportistas, se agrupan por estado:
 
 **Observación técnica**
 
-Los datos se obtienen de la tabla `SUMMARY_SERVICE`. El campo `ServicePaidToTransport` (tipo `bit`) indica el estado de pago: `0` = no pagado (pendiente), `1` = pagado.
+Los datos se obtienen de la tabla `SUMMARY_SERVICE` del campo `TransportIncome`. El campo `ServicePaidToTransport` (tipo `bit`) indica el estado de pago: `0` = no pagado (pendiente), `1` = pagado.
 
 > **Condición obligatoria:** Solo se deben considerar los registros donde `ComplianceTransportCompanyApproved = 1`.
 
@@ -327,7 +326,7 @@ Los datos se obtienen de la tabla `SUMMARY_SERVICE`. El campo `ServicePaidToTran
 | Elemento   | Español | Inglés |
 |------------|---------|--------|
 | Tooltip    | Consulta de los servicios por pagar a los transportistas, se agrupan por estado: pagados o pendientes. | Query of services to be paid to carriers, grouped by status: paid or pending. |
-| Subtítulo  | La fecha utilizada es la fecha fin. | The date used is the end date. |
+| Subtítulo  | - | - |
 
 ---
 
