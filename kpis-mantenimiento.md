@@ -25,7 +25,6 @@ Cada KPI se documenta con dos secciones:
 **¿Qué muestra este KPI?**
 Muestra el porcentaje de vehículos aprobados (con CTP, Marchamo, Póliza y DEKRA al día) por empresa de transporte, en comparación con el total de vehículos registrados.
 
-- La empresa **cliente** no visualiza datos propios en esta consulta.
 - La empresa de **transporte** solo visualiza los datos de su propia empresa.
 - La **zona franca** visualiza los datos de todas las empresas de transporte de la zona.
 
