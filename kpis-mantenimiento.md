@@ -216,7 +216,7 @@ Consulta las evaluaciones para la fecha fin seleccionada, toma la última evalua
 | Elemento   | Español | Inglés |
 |------------|---------|--------|
 | Tooltip    | Consulta las evaluaciones para la fecha fin seleccionada, toma la última evaluación de cada autobús y las promedia para la misma empresa de transporte. | Queries evaluations on the selected end date, takes the last evaluation of each bus and averages them for the same transport company. |
-| Subtítulo  | — | — |
+| Subtítulo  | La fecha utilizada es la fecha fin. | The date used is the end date. |
 
 ---
 
