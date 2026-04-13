@@ -576,7 +576,6 @@ El payload del mensaje en la cola tiene la siguiente estructura:
 **¿Qué muestra este KPI?**
 Muestra la cantidad de unidades que registraron alertas de accidentalidad, reportadas por conductores o pasajeros. Independientemente de cuántas veces se reporte el mismo servicio, cada unidad se cuenta **una única vez** por servicio.
 
-- La empresa **cliente** no visualiza datos en este KPI.
 - La empresa de **transporte** solo visualiza los datos de su propia flota.
 - La **zona franca** visualiza los datos de todas las empresas de transporte de la zona.
 
@@ -666,7 +665,6 @@ Se consulta las alertas de accidentalidad que se hayan reportado por los conduct
 Se contabilizan los vehículos de las empresas de transporte que hayan tenido registro de unidad accidentada en el rango de fechas consultado. Sin importar cuántas alertas se generen para el mismo servicio, se cuenta una única vez por unidad.
 
 Comportamiento según tipo de empresa:
-- **Empresa cliente:** no se retornan datos.
 - **Empresa de transporte:** visualiza únicamente los datos de su propia empresa.
 - **Zona franca:** visualiza los datos de todas las empresas de transporte de la zona.
 
@@ -683,7 +681,7 @@ Comportamiento según tipo de empresa:
 
 ---
 
-## KPI: Documentación de mantenimiento (registro semanal) — Barras
+## KPI: Documentación de mantenimiento  — Barras
 
 ---
 
@@ -760,7 +758,7 @@ Se consulta los registros de mantenimiento realizados para los autobuses en el r
 
 | Campo                     | Valor                                                                                                                                                                         |
 |---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Operación                 | Consultar en `BUS_MAINTENANCE` los autobuses con registros de mantenimiento en el rango de fechas, agruparlos por empresa de transporte y calcular la proporción versus el total de vehículos activos de cada empresa |
+| Operación                 | Consultar en la tabla `BUS_MAINTENANCE` los autobuses con registros de mantenimiento en el rango de fechas, agruparlos por empresa de transporte y calcular la proporción versus el total de vehículos activos de cada empresa |
 | Tabla de hechos           | —                                                                                                                                                                             |
 | Procedimiento de consulta | `PRC_RIDECODE_GET_KPI_MAINTENANCE_DOCUMENTATION`                                                                                                                              |
 
@@ -776,7 +774,7 @@ Se consulta los registros de mantenimiento realizados para los autobuses en el r
 
 | Elemento   | Español | Inglés |
 |------------|---------|--------|
-| Tooltip    | Se consulta los registros de mantenimiento realizados para los autobuses en el rango de fechas. | Queries the maintenance records performed for buses within the selected date range. |
+| Tooltip    | Se consulta los registros de mantenimiento realizados para los autobuses en el rango de fechas y se obtiene la proporción de autobuses respecto del total de la flota activa en la empresa de transporte. | The maintenance records for buses within the specified date range are queried, and the proportion of buses relative to the total active fleet of the transportation company is calculated. |
 | Subtítulo  | — | — |
 
 ---
