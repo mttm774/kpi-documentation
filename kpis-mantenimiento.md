@@ -343,7 +343,6 @@ Comportamiento según tipo de empresa:
 **¿Qué muestra este KPI?**
 Muestra el promedio del año de fabricación de los autobuses por empresa de transporte, reflejando la antigüedad promedio de la flota en la fecha de corte seleccionada.
 
-- La empresa **cliente** no visualiza datos en este KPI.
 - La empresa de **transporte** solo visualiza los datos de su propia flota.
 - La **zona franca** visualiza los datos de todas las empresas de transporte de la zona.
 
