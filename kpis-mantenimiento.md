@@ -136,7 +136,7 @@ Contar los vehículos de cada empresa de transporte que hayan sido marcados como
 ### [Usuario]
 
 **¿Qué muestra este KPI?**
-Muestra el promedio de las calificaciones de mantenimiento de los autobuses por empresa de transporte. Para cada empresa, el sistema toma la última evaluación registrada de cada autobús dentro del rango de fechas seleccionado y calcula el promedio de esas calificaciones.
+Muestra el promedio de las calificaciones de mantenimiento de los autobuses por empresa de transporte. Para cada empresa, el sistema toma la última evaluación registrada de cada autobús dentro para la fechas fin seleccionada y calcula el promedio de esas calificaciones.
 
 ---
 
@@ -148,7 +148,7 @@ Este KPI **no utiliza precálculo ni agrupación**. La información se obtiene d
 
 **¿Cómo se consulta la información?**
 
-Al cargar el KPI, el sistema ejecuta la consulta en tiempo real con base en los filtros que el usuario haya definido: fecha inicio y fecha fin.
+Al cargar el KPI, el sistema ejecuta la consulta en tiempo real con base en los filtros que el usuario haya definido: fecha fin.
 
 ---
 
@@ -159,21 +159,21 @@ Al cargar el KPI, el sistema ejecuta la consulta en tiempo real con base en los 
 | Turno        | NO     |
 | Ramal        | NO     |
 | Tipo de ruta | NO     |
-| Fecha inicio | **SÍ** |
+| Fecha inicio | NO     |
 | Fecha fin    | **SÍ** |
 
 ---
 
 **Descripción** _(se muestra como tooltip en la página de KPIs y en el dashboard)_
 
-Consulta las evaluaciones en un rango de fechas, toma la última evaluación de cada autobús y las promedia para la misma empresa de transporte, se toma los valores de todo el rango de evaluaciones.
+Consulta las evaluaciones para la fecha fin seleccionada, toma la última evaluación de cada autobús y las promedia para la misma empresa de transporte.
 
 | Filtro       | Aplica |
 |--------------|--------|
 | Turno        | NO     |
 | Ramal        | NO     |
 | Tipo de ruta | NO     |
-| Fecha inicio | **SÍ** |
+| Fecha inicio | NO     |
 | Fecha fin    | **SÍ** |
 
 ---
@@ -206,7 +206,7 @@ Consulta las evaluaciones en un rango de fechas, toma la última evaluación de 
 
 | Campo                     | Valor                                                                                                                                                                   |
 |---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Operación                 | A partir del `busId`, obtener la empresa de transporte; luego obtener la última evaluación de todos los autobuses de dicha empresa dentro del rango de fechas y calcular el promedio de las calificaciones obtenidas |
+| Operación                 | A partir del `busId`, obtener la empresa de transporte; luego obtener la última evaluación de todos los autobuses de dicha empresa para la fecha fin seleccionada y calcular el promedio de las calificaciones obtenidas |
 | Tabla de hechos           | —                                                                                                                                                                       |
 | Procedimiento de consulta | `PRC_RIDECODE_GET_KPI_CARRIER_MAINTENANCE`                                                                                                                              |
 
@@ -215,7 +215,7 @@ Consulta las evaluaciones en un rango de fechas, toma la última evaluación de 
 
 | Elemento   | Español | Inglés |
 |------------|---------|--------|
-| Tooltip    | Consulta las evaluaciones en un rango de fechas, toma la última evaluación de cada autobús y las promedia para la misma empresa de transporte, se toma los valores de todo el rango de evaluaciones. | Queries evaluations within a date range, takes the last evaluation of each bus and averages them for the same transport company, considering all evaluations within the range. |
+| Tooltip    | Consulta las evaluaciones para la fecha fin seleccionada, toma la última evaluación de cada autobús y las promedia para la misma empresa de transporte. | Queries evaluations on the selected end date, takes the last evaluation of each bus and averages them for the same transport company. |
 | Subtítulo  | — | — |
 
 ---
