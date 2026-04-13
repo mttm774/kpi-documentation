@@ -265,7 +265,7 @@ Al cargar el KPI, el sistema ejecuta la consulta en tiempo real con base en los 
 
 **Descripción** _(se muestra como tooltip en la página de KPIs y en el dashboard)_
 
-Consulta las evaluaciones de autobuses realizadas por los pasajeros de servicios aprobados por el transportista y las fechas se filtran considerando la fecha del servicio y no la fecha de la evaluación.
+Muestra las evaluaciones de autobuses realizadas por los pasajeros de servicios aprobados por el transportista, se promedian las calificaciones realizadas a los autobuses y se filtran según la fecha servicio y no la fecha de la evaluación.
 
 | Filtro       | Aplica |
 |--------------|--------|
@@ -306,7 +306,7 @@ Consulta las evaluaciones de autobuses realizadas por los pasajeros de servicios
 
 | Campo                     | Valor                                                                                                                                                          |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Operación                 | Promedio del campo `Weighted` de la tabla `evaluationResult`, agrupado por autobús, filtrando por tipo de evaluación **autobús** y aplicando turno, ramal, tipo de ruta y rango de fechas desde `summaryService.startDate` |
+| Operación                 | Promedio del campo `Weighted` de la tabla `Evaluation_Result`, agrupado por autobús, filtrando por tipo de evaluación **autobús** y aplicando turno, ramal, tipo de ruta y rango de fechas desde `summaryService.startDate` |
 | Tabla de hechos           | —                                                                                                                                                              |
 | Procedimiento de consulta | `PRC_RIDECODE_GET_KPI_UNIT_RATING`                                                                                                                             |
 
@@ -327,21 +327,21 @@ Comportamiento según tipo de empresa:
 
 | Elemento   | Español | Inglés |
 |------------|---------|--------|
-| Tooltip    | Consulta las evaluaciones de autobuses realizadas por los pasajeros de servicios aprobados por el transportista y las fechas se filtran considerando la fecha del servicio y no la fecha de la evaluación. | Queries bus evaluations made by passengers of carrier-approved services; dates are filtered based on the service date, not the evaluation date. |
+| Tooltip    | Muestra las evaluaciones de autobuses realizadas por los pasajeros de servicios aprobados por el transportista, se promedian las calificaciones realizadas a los autobuses y se filtran según la fecha servicio y no la fecha de la evaluación. | Displays bus ratings submitted by passengers on services approved by the carrier; the ratings are averaged and filtered by service date rather than the date of the rating. |
 | Subtítulo  | — | — |
 
 ---
 
 ---
 
-## KPI: Vida útil buses (promedio Año/Modelo) — Barras
+## KPI: Vida útil buses (promedio Año de fabricación) — Barras
 
 ---
 
 ### [Usuario]
 
 **¿Qué muestra este KPI?**
-Muestra el promedio del año/modelo de los autobuses por empresa de transporte, reflejando la antigüedad promedio de la flota en la fecha de corte seleccionada.
+Muestra el promedio del año de fabricación de los autobuses por empresa de transporte, reflejando la antigüedad promedio de la flota en la fecha de corte seleccionada.
 
 - La empresa **cliente** no visualiza datos en este KPI.
 - La empresa de **transporte** solo visualiza los datos de su propia flota.
@@ -356,7 +356,7 @@ Muestra el promedio del año/modelo de los autobuses por empresa de transporte, 
 La información de este KPI se actualiza automáticamente en los siguientes momentos:
 
 - Cuando se **crea o actualiza un autobús** en el sistema.
-- De forma **automática todos los días a las 23:00** (hora de la zona franca según su zona horaria), independientemente de la actividad del usuario.
+- De forma **automática todos los días a las 00:00** (hora de la zona franca según su zona horaria), independientemente de la actividad del usuario.
 
 Esto significa que los datos siempre reflejan el estado más reciente disponible, sin necesidad de que el usuario realice ninguna acción adicional.
 
@@ -364,7 +364,7 @@ Esto significa que los datos siempre reflejan el estado más reciente disponible
 
 **¿Cómo se consulta la información?**
 
-Al cargar el KPI, el sistema consulta los datos ya calculados y almacenados. El usuario solo necesita seleccionar la **Fecha fin** para definir el corte temporal; el sistema devolverá el promedio del año/modelo de los autobuses de cada empresa de transporte en esa fecha.
+Al cargar el KPI, el sistema consulta los datos ya calculados y almacenados. El usuario solo necesita seleccionar la **Fecha fin** para definir el corte temporal; el sistema devolverá el promedio del año de los autobuses de cada empresa de transporte en esa fecha.
 
 ---
 
@@ -382,7 +382,7 @@ Al cargar el KPI, el sistema consulta los datos ya calculados y almacenados. El 
 
 **Descripción** _(se muestra como tooltip en la página de KPIs y en el dashboard)_
 
-Consulta los modelos de los autobuses por transportista y los promedia.
+Consulta los años de fabricación de los autobuses por transportista y los promedia.
 
 | Filtro       | Aplica |
 |--------------|--------|
@@ -409,12 +409,12 @@ Consulta los modelos de los autobuses por transportista y los promedia.
 | Campo                               | Valor                                                                                              |
 |-------------------------------------|----------------------------------------------------------------------------------------------------|
 | Programa de agrupación              | SÍ                                                                                                 |
-| Evento disparador                   | Creación o actualización de un autobús · Ejecución diaria a las 23:00 (hora de la zona franca según su zona horaria) |
+| Evento disparador                   | Creación o actualización de un autobús · Ejecución diaria a las 00:00 (hora de la zona franca según su zona horaria) |
 | Tópico en la cola                   | `buses_updates`                                                                                    |
 | Procedimiento de agrupación         | `PRC_RIDECODE_KPI_AGGREGATION_SUMMARY_BUSES`                                                       |
 | Parámetros procedimiento agrupación | —                                                                                                  |
 
-> El evento puede ser disparado por una acción del usuario (creación o actualización de un autobús), lo que guarda un mensaje en la cola con su payload. El worker escucha la cola `buses_updates` y ejecuta la agrupación. Adicionalmente, la agrupación se ejecuta de forma programada todos los días a las 23:00 (hora de la zona franca según su zona horaria).
+> El evento puede ser disparado por una acción del usuario (creación o actualización de un autobús), lo que guarda un mensaje en la cola con su payload. El worker escucha la cola `buses_updates` y ejecuta la agrupación. Adicionalmente, la agrupación se ejecuta de forma programada todos los días a las 00:00 (hora de la zona franca según su zona horaria).
 >
 > El programa de agrupación garantiza que múltiples eventos sobre el mismo vehículo no generen registros duplicados, sino que actualicen un único registro agrupado en la tabla de hechos.
 
@@ -424,7 +424,7 @@ Consulta los modelos de los autobuses por transportista y los promedia.
 
 | Campo                     | Valor                                                                          |
 |---------------------------|--------------------------------------------------------------------------------|
-| Operación                 | Almacenar en la tabla de agregación el año/modelo del vehículo (`buses.model`) |
+| Operación                 | Almacenar en la tabla de agregación el año del vehículo (`buses.model`) |
 | Tabla de hechos           | `BUS_SUMMARY`                                                                  |
 | Procedimiento de consulta | `PRC_RIDECODE_GET_KPI_USE_LIFE_BUSES`                                          |
 
@@ -432,7 +432,7 @@ Consulta los modelos de los autobuses por transportista y los promedia.
 
 **Observación técnica**
 
-Se calcula el promedio de los modelos de los vehículos de las empresas de transporte a la **Fecha fin** de consulta.
+Se calcula el promedio de los años de frabricación de los vehículos de las empresas de transporte a la **Fecha fin** de consulta.
 
 Comportamiento según tipo de empresa:
 - **Empresa cliente:** no se retornan datos.
@@ -445,7 +445,7 @@ Comportamiento según tipo de empresa:
 
 | Elemento   | Español | Inglés |
 |------------|---------|--------|
-| Tooltip    | Consulta los modelos de los autobuses por transportista y los promedia. | Queries the bus models by carrier and averages them. |
+| Tooltip    | Consulta los años de frabricación de los autobuses por transportista y los promedia. | Queries the bus models by carrier and averages them. |
 | Subtítulo  | La fecha utilizada es la fecha fin. | The date used is the end date. |
 
 ---
